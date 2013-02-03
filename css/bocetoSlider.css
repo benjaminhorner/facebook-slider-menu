@@ -1,0 +1,59 @@
+/*
+    Document   : bocetoSlider
+    Created on : 2 févr. 2013, 00:20:45
+    Author     : benjaminhorner
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root {
+        display: block;
+}
+*, html{
+        margin: 0;
+        padding: 0;
+}
+body{
+        background: #cccccc;
+        padding:0;
+        margin:0;
+}
+
+/*
+        Main Container
+*/
+#bocetoSlider-container{
+        overflow: hidden;
+        position: absolute;
+        height:100%;
+        width:100%;
+        background: blue;
+}
+/*
+        Boceto Slider
+*/
+#bocetoSlider{
+        height:100%;
+        width:100%;
+        background: red;
+        position: absolute;
+        overflow:scroll;
+        top:0;
+        overflow: hidden;
+}
+#bocetoSlider-btn{
+        background: yellow;
+        width:40px;
+        height:40px;
+        position: absolute;
+        left:10px;
+        top:5px;
+}
+.header{
+        height:50px;
+        background: pink;
+}
+#bocetoSlider-header{
+        background: orange;
+}
+
