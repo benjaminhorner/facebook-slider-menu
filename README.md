@@ -1,2 +1,2 @@
-bocetoSlider
+facebook-like slider menu
 ============
