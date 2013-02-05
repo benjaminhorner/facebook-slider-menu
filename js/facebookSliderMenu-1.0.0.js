@@ -4,6 +4,7 @@
  */
 (function($) {
         $.fn.facebookSliderMenu = function(params) {
+                document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
                 /*
                 * facebookSliderMenu Object
                 * */
@@ -30,6 +31,8 @@
                 /*
                  * Slider options
                  **/
+                var mouseX;
+                var endMouseX;
                 var menuBtn = '#fbs-menu-btn';
                 var $menuBtn = $facebookSliderMenu.find(menuBtn);
                 var sliderWidth = params.sliderWidth;
@@ -43,7 +46,7 @@
                 var openOrClosed;
                 var open = params.open;
                 if(open) {openOrClosed = openWidth+'%'} else{openOrClosed = '0%'}
-                // Options for opening direction (left, right, both)
+                // Options for opening direction (left, both)
                 var optionsOpen;
                 var optionsClose;
                 if(direction == 'left') {
@@ -52,7 +55,7 @@
                 }
                 (open) ? $menuBtn.data('clickState', 1) : $menuBtn.data('clickState', 0);
                 /*
-                 * Re-initialize varaibels that need it
+                 * Re-initialize variables that need it
                  **/
                 var reInit = function(){
                         totalWidth = $(window).width();
@@ -61,7 +64,6 @@
                         sliderWidthInPixels = Math.ceil((totalWidth)*(sliderWidth/100));
                         var leftOffset = (totalWidth*0.85);
                         if($facebookSliderMenu.offset().left != 0) $facebookSliderMenu.css('left', leftOffset);
-                        //console.log('totalWidth : '+totalWidth+' limitRight : '+limitRight+' sliderWidthInPixels : '+sliderWidthInPixels);
                 }
                 /*
                  * Active Zone Object
@@ -87,14 +89,47 @@
                 * Click and Move events
                 **/
                 var getStartClickEvent = function() {
-                       return ('touchstart' in window) ? 'touchstart' : 'mousedown';
+                       return ('ontouchstart' in window) ? 'touchstart' : 'mousedown';
                 };
                 var getEndClickEvent = function() {
-                       return ('touchend' in window) ? 'touchend' : 'mouseup';
+                       return ('ontouchend' in window) ? 'touchend' : 'mouseup';
                 };
                 var getMoveEvent = function() {
-                       return ('touchmove' in window) ? 'touchmove' : 'mousemove';
+                       return ('ontouchmove' in window) ? 'touchmove' : 'mousemove';
                 };
+                /*
+                 * Test if touch screen
+                 **/
+                var getMouseX = function(e){
+                        if ('ontouchmove' in window) {
+                                //iOS & android
+                                mouseX = e.originalEvent.targetTouches[0].pageX;
+                                return mouseX;
+                        } else if(window.navigator.msPointerEnabled) {
+                                //Win8
+                                mouseX = e.originalEvent.targetTouches[0].pageX;
+                                return mouseX;
+                        }
+                        else{
+                                mouseX = e.pageX;
+                                return mouseX;
+                        }
+                }
+                var getReleaseMouseX = function(e){
+                        if ('touchend' in window) {
+                                //iOS & android
+                                endMouseX = e.originalEvent.changedTouches[0].pageX;
+                                return mouseX;
+                        } else if(window.navigator.msPointerEnabled) {
+                                //Win8
+                                endMouseX = e.originalEvent.changedTouches[0].pageX;
+                                return mouseX;
+                        }
+                        else{
+                                endMouseX = e.pageX;
+                                return mouseX;
+                        }
+                }
                 /*
                  * Slider Left only or Both
                 * */
@@ -118,13 +153,14 @@
                 /*
                  * Glisse le slider en place quand on le lâche
                  **/
-                var snapFBS = function(mouseX){
+                var snapFBS = function(msX){
+                        var mX = msX;
                         getSnapZone();
                         if($menuBtn.data('clickState')){
-                                (mouseX >= snapZone.right) ? $facebookSliderMenu.animate({left: limitRight}) : $facebookSliderMenu.animate({left: limitLeft});
+                                (mX >= snapZone.right) ? $facebookSliderMenu.animate({left: limitRight}) : $facebookSliderMenu.animate({left: limitLeft});
                         }
                         else{
-                                (mouseX >= snapZone.left) ? $facebookSliderMenu.animate({left: limitRight}) : $facebookSliderMenu.animate({left: limitLeft});
+                                (mX >= snapZone.left) ? $facebookSliderMenu.animate({left: limitRight}) : $facebookSliderMenu.animate({left: limitLeft});
                         }
                 }
                 /*
@@ -133,20 +169,20 @@
                 var moveSlider  = function(diff, mouseX){
                         doSnap = true;
                         var distToMove = (mouseX-diff);
-                        if(doMove) $facebookSliderMenu.offset({left: distToMove});
+                        if(doMove) {$facebookSliderMenu.offset({left: distToMove});}
                         if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', 0); doSnap = false;}
                         if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', 1); doSnap = false;}
                 }
                 var followMouseX = function(diff){
                         if(doMove){
                                 $(document).bind(getMoveEvent(), function(e){
-                                        var mouseX = e.pageX;
+                                        getMouseX(e);
                                         moveSlider(diff, mouseX);
                                 });
                         }
                  }
                  $facebookSliderMenu.bind(getStartClickEvent(), function(e){
-                        var startMouseX = e.pageX;
+                        var startMouseX = getMouseX(e);
                         var initialOffset = $facebookSliderMenu.offset().left;
                         var diff = (startMouseX-initialOffset);
                         getActiveZone();
@@ -156,12 +192,12 @@
                         }
                  });
                  $facebookSliderMenu.bind(getEndClickEvent(), function(e){
-                         var mouseX = e.pageX;
-                         if(doSnap) snapFBS(mouseX);
+                         var mouseX = getReleaseMouseX(e);
+                         if(doSnap) {snapFBS(mouseX);}
                          doMove = false;
                  });
                  /*
-                  * Toggle Slider : toggle() has been deprected as of jQuery 1.9.0 for anuthing but visibility so use data() instead
+                  * Toggle Slider : toggle() has been deprected as of jQuery 1.9.0 for anything but visibility so use data() instead
                   **/
                  $menuBtn.click(function(){
                          toggleMenu();
