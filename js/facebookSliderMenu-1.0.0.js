@@ -17,7 +17,6 @@
                         direction: 'left', // accepted values => left, both
                         animationSpeed: 'fast',
                         animationEasing: 'swing',
-                        menuBtn: '#fbs-menu-btn',
                         open: true
                 }, params);
                 /*
@@ -31,7 +30,8 @@
                 /*
                  * Slider options
                  **/
-                var $menuBtn = $facebookSliderMenu.find(params.menuBtn);
+                var menuBtn = '#fbs-menu-btn';
+                var $menuBtn = $facebookSliderMenu.find(menuBtn);
                 var sliderWidth = params.sliderWidth;
                 var openWidth = (100-sliderWidth);
                 var direction = params.direction;
