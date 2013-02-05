@@ -101,11 +101,15 @@ body{
 .fbs-header-dark{
         border-bottom: 1px solid #252525;
 }
-.fbs-header-dark h1{
-        color: #ccc;
-}
 .fbs-header h1{
         margin:0 !important;
         text-align: center;
+        text-shadow: -1px -1px 1px #ffffff;
+        filter: dropshadow(color=#ffffff, offx=-1, offy=-1);
+}
+.fbs-header-dark h1{
+        color: #ccc;
+        text-shadow: -1px -1px 1px #222222;
+        filter: dropshadow(color=#222222, offx=-1, offy=-1);
 }
 
