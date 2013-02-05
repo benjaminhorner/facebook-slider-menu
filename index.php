@@ -5,25 +5,30 @@
                 <title></title>
                 <!-- CSS files -->
                 <link rel="stylesheet" href="css/facebookSliderMenu.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+                <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+                <link rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css" media="screen" title="no title" charset="utf-8" />
                 <!-- JS files -->
                 <script type="text/javascript" src="js/jquery-1.9.0.js"></script>
                 <script type="text/javascript" src="js/jquery-easing.1.3.js"></script>
+                <script type="text/javascript" src="js/bootstrap.min.js"></script>
                 <script type="text/javascript" src="js/facebookSliderMenu-1.0.0.js"></script>
         </head>
         <body>
                 <!-- GLOBAL CONTAINER -->
                 <div id="fbs-app-container">
                         <!-- BACKGROUND MENU -->
-                        <div id="fbs-menu-container">
-                                <div id="fbs-menu-header" class="fbs-header"></div>
+                        <div id="fbs-menu-container" class="gradient-dark">
+                                <div id="fbs-menu-header" class="fbs-header fbs-header-dark gradient-dark">
+                                        <h1>Menu Header</h1>
+                                </div>
                         </div>
                         <!-- ! BACKGROUND MENU -->
                         <!-- SITE CONTAINER -->
-                        <div id="fbs-main-content-container">
-                                <div class="fbs-header" id="fbs-main-content-header">
-                                        <a id="fbs-menu-btn" href="#"></a>
+                        <div id="fbs-main-content-container" class="gradient-light">
+                                <div id="fbs-main-content-header" class="fbs-header fbs-header-with-icon fbs-header-light gradient-light">
+                                        <a id="fbs-menu-btn" class="btn btn-large" href="#"></a>
+                                        <h1>Main Content Page Header</h1>
                                 </div>
-                                2
                         </div>
                         <!-- ! SITE CONTAINER -->
                 </div>

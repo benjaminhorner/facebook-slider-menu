@@ -96,9 +96,13 @@
                        return ('touchmove' in window) ? 'touchmove' : 'mousemove';
                 };
                 /*
-                 * Slider Left or Right
+                 * Slider Left only or Both
                 * */
-                $facebookSliderMenu.css(direction, openOrClosed)
+                $facebookSliderMenu.css(direction, openOrClosed);
+                /*
+                 * Width of Menu and Sub-Menu
+                * */
+                $facebookSliderMenu.siblings().css('width', openWidth+'%');
                 /*
                  * Slider Animation
                  **/
