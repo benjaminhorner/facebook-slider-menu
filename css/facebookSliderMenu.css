@@ -1,11 +1,15 @@
 /*
-    Document   : bocetoSlider
+    Document   : facebook-like sliding menu
     Created on : 2 févr. 2013, 00:20:45
     Author     : benjaminhorner
     Description:
-        Purpose of the stylesheet follows.
+        Specific stylesheet for Facebook like sliding menu.
+        Prefix : fbs (for all classes and ids)
 */
 
+/*
+        General styles
+*/
 root {
         display: block;
 }
@@ -20,9 +24,9 @@ body{
 }
 
 /*
-        Main Container
+        Menu 1 styles
 */
-#bocetoSlider-container{
+#fbs-app-container{
         overflow: hidden;
         position: absolute;
         height:100%;
@@ -30,9 +34,9 @@ body{
         background: blue;
 }
 /*
-        Boceto Slider
+        Main Container styles
 */
-#bocetoSlider{
+#fbs-main-content-container{
         height:100%;
         width:100%;
         background: red;
@@ -41,7 +45,7 @@ body{
         top:0;
         overflow: hidden;
 }
-#bocetoSlider-btn{
+#fbs-menu-btn{
         background: yellow;
         width:40px;
         height:40px;
@@ -49,11 +53,10 @@ body{
         left:10px;
         top:5px;
 }
-.header{
+.fbs-header{
         height:50px;
-        background: pink;
-}
-#bocetoSlider-header{
+        background: pink;}
+#fbs-main-content-header{
         background: orange;
 }
 
