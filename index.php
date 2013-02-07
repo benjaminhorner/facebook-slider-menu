@@ -29,7 +29,7 @@
                         <!-- SITE CONTAINER -->
                         <div id="fbs-main-content-container" class="gradient-light">
                                 <div id="fbs-main-content-header" class="fbs-header fbs-header-with-icon fbs-header-light gradient-light">
-                                        <a id="fbs-menu-btn" class="btn btn-large" href="#"></a>
+                                        <a id="fbs-menu-btn" class="gradient-light" href="#"></a>
                                         <h1>Main Content Page Header</h1>
                                 </div>
                         </div>

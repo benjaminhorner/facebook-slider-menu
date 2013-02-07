@@ -169,13 +169,14 @@
                 var moveSlider  = function(diff, mouseX){
                         doSnap = true;
                         var distToMove = (mouseX-diff);
-                        if(doMove) {$facebookSliderMenu.offset({left: distToMove});}
-                        if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', 0); doSnap = false;}
-                        if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', 1); doSnap = false;}
+                        if(doMove) {$facebookSliderMenu.stop().offset({left: distToMove});}
+                        if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', false); doSnap = false;}
+                        if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', true); doSnap = false;}
                 }
                 var followMouseX = function(diff){
                         if(doMove){
                                 $(document).bind(getMoveEvent(), function(e){
+                                        e.stopPropagation();
                                         getMouseX(e);
                                         moveSlider(diff, mouseX);
                                 });
@@ -195,6 +196,7 @@
                          var mouseX = getReleaseMouseX(e);
                          if(doSnap) {snapFBS(mouseX);}
                          doMove = false;
+                         $facebookSliderMenu.unbind(getMoveEvent());
                  });
                  /*
                   * Toggle Slider : toggle() has been deprected as of jQuery 1.9.0 for anything but visibility so use data() instead
