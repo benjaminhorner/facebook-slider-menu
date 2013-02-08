@@ -166,20 +166,19 @@
                 /*
                 * Déplacer le slider
                 * */
-                var moveSlider  = function(diff, mouseX){
+                var moveSlider  = function(e){
                         doSnap = true;
+                        var diff = e.data.diff;
+                        e.stopPropagation();
+                        getMouseX(e);
                         var distToMove = (mouseX-diff);
-                        if(doMove) {$facebookSliderMenu.stop().offset({left: distToMove});}
-                        if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', false); doSnap = false;}
-                        if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', true); doSnap = false;}
+                        if(doMove) {$facebookSliderMenu.stop().css('left', distToMove);}
+                        if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', !$menuBtn.data('clickState')); doSnap = false;}
+                        if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', !$menuBtn.data('clickState')); doSnap = false;}
                 }
                 var followMouseX = function(diff){
                         if(doMove){
-                                $(document).bind(getMoveEvent(), function(e){
-                                        e.stopPropagation();
-                                        getMouseX(e);
-                                        moveSlider(diff, mouseX);
-                                });
+                                $(document).bind(getMoveEvent(), {diff: diff}, moveSlider);
                         }
                  }
                  $facebookSliderMenu.bind(getStartClickEvent(), function(e){
@@ -196,7 +195,7 @@
                          var mouseX = getReleaseMouseX(e);
                          if(doSnap) {snapFBS(mouseX);}
                          doMove = false;
-                         $facebookSliderMenu.unbind(getMoveEvent());
+                         $(document).unbind(getMoveEvent(), moveSlider);
                  });
                  /*
                   * Toggle Slider : toggle() has been deprected as of jQuery 1.9.0 for anything but visibility so use data() instead
