@@ -162,6 +162,8 @@
                         else{
                                 (mX >= snapZone.left) ? $facebookSliderMenu.animate({left: limitRight}) : $facebookSliderMenu.animate({left: limitLeft});
                         }
+                        if($facebookSliderMenu.offset().left <= limitLeft) {$menuBtn.data('clickState', false);}
+                        if($facebookSliderMenu.offset().left >= limitRight) {$menuBtn.data('clickState', true);}
                 }
                 /*
                 * Déplacer le slider
@@ -173,8 +175,8 @@
                         getMouseX(e);
                         var distToMove = (mouseX-diff);
                         if(doMove) {$facebookSliderMenu.stop().css('left', distToMove);}
-                        if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', !$menuBtn.data('clickState')); doSnap = false;}
-                        if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', !$menuBtn.data('clickState')); doSnap = false;}
+                        if($facebookSliderMenu.offset().left <= limitLeft) {$facebookSliderMenu.offset({left: limitLeft}); $menuBtn.data('clickState', false); doSnap = false;}
+                        if($facebookSliderMenu.offset().left >= limitRight) {$facebookSliderMenu.offset({left: limitRight}); $menuBtn.data('clickState', true); doSnap = false;}
                 }
                 var followMouseX = function(diff){
                         if(doMove){
