@@ -64,6 +64,36 @@ body{
         height:100%;
         width:100%;
 }
+
+#fbs-menu-menu ul{
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+#fbs-menu-menu h4{
+	border-bottom:1px solid black;
+	border-top: 1px solid #333;
+	font-size:24px;
+	color:#fff;
+	padding:20px;
+	margin:0;
+	text-transform: uppercase;
+}
+#fbs-menu-menu ul li{
+	border-bottom:1px solid black;
+	border-top: 1px solid #333;
+	font-size: 16px;
+}
+#fbs-menu-menu ul li a{
+	color:#999;
+	width:100%;
+	padding:20px;
+	display: block;
+}
+#fbs-menu-menu ul li a:hover{
+	color:#fff;
+	text-decoration: none;
+}
 /*
         Main Container styles
 */
@@ -71,11 +101,14 @@ body{
         height:100%;
         width:100%;
         position: absolute;
-        overflow:scroll;
         top:0;
         overflow: hidden;
         -webkit-box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.8);
         box-shadow:  0px 0px 10px 3px rgba(0, 0, 0, 0.8);
+	z-index: 4;
+}
+#fbs-main-content-content p{
+	padding:20px;
 }
 #fbs-menu-btn{
         width:60px;
@@ -115,6 +148,7 @@ body{
         overflow: hidden;
         -o-text-overflow: ellipsis; /* pour Opera 9 */
         text-overflow: ellipsis; /* pour le reste du monde */
+	z-index:2;
 }
 .fbs-header-with-icon{
         padding-left:60px;
@@ -147,9 +181,29 @@ body{
         text-overflow: ellipsis; /* pour le reste du monde */
         text-wrap:none;
 }
+
+/*
+* iScroll CSS
+*/
+.wrapper {
+	position:absolute;
+	top:80px;
+	bottom:0;
+	left:0;
+	width:100%;
+	overflow:auto;
+}
+
+#fbs-menu-menu, #fbs-main-content-content {
+	position:absolute;
+	-webkit-touch-callout:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	width:100%;
+}
+
 /* Smartphones (portrait) ----------- */
 @media only screen
-and (max-width : 320px) {
+and (max-width : 480px) {
         h1{
                 font-size: 16px !important;
                 line-height: 30px !important;
