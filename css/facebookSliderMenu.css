@@ -247,6 +247,9 @@ and (max-width : 480px) {
                 padding:10px 10px 10px 40px;
                 overflow: hidden;
         }
+	.wrapper {
+		top:50px;
+	}
 }
 
 /* iPads (portrait and landscape) ----------- */
